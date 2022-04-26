@@ -1,6 +1,8 @@
 import 'package:dogsfoodapp/brandDetails.dart';
 import 'package:flutter/material.dart';
 
+import 'showGridview.dart';
+
 class BrandGridView extends StatefulWidget {
   const BrandGridView({Key? key}) : super(key: key);
 
@@ -20,30 +22,38 @@ class _BrandGridViewState extends State<BrandGridView> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
       children: [
-        GridView.builder(
-            shrinkWrap: true,
-            physics: const ScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3, crossAxisSpacing: 20, mainAxisSpacing: 20),
-            itemCount: brandList.length,
-            itemBuilder: (context, index) => GestureDetector(
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const BrandDetails())),
-                  child: Container(
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(15),
-                        image: DecorationImage(
-                          image:
-                              AssetImage(brandList[index]["image"].toString()),
-                        )),
-                  ),
-                )),
+        Stack(
+          children: [
+            GridView.builder(
+                shrinkWrap: true,
+                physics: const ScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20),
+                itemCount: brandList.length,
+                itemBuilder: (context, index) => GestureDetector(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const BrandDetails())),
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: BorderRadius.circular(15),
+                            image: DecorationImage(
+                              image: AssetImage(
+                                  brandList[index]["image"].toString()),
+                            )),
+                      ),
+                    )),
+          ],
+        ),
+        //const SizedBox(height: 15),
+        //const ShowGridview(),
       ],
     );
   }

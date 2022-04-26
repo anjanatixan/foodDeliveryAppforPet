@@ -7,7 +7,8 @@ import 'circle_listview.dart';
 import 'petdetailsGridView.dart';
 
 class Petdetails extends StatefulWidget {
-  const Petdetails({Key? key}) : super(key: key);
+  int indexOf;
+  Petdetails({Key? key, required this.indexOf}) : super(key: key);
 
   @override
   State<Petdetails> createState() => _PetdetailsState();
@@ -64,31 +65,33 @@ class _PetdetailsState extends State<Petdetails> {
                 height: 20,
               ),
               const CircleListView(),
-              Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      "Breeds",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    PetDetailsGrid(),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    Text(
-                      "Brands",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    BrandGridView(),
-                  ],
+              SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Breeds",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      PetDetailsGrid(),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        "Brands",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      BrandGridView(),
+                    ],
+                  ),
                 ),
               )
             ],

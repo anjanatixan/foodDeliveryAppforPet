@@ -26,7 +26,7 @@ Widget arrowIcon({required VoidCallback ontap}) => IconButton(
       padding: EdgeInsets.all(15.0),
       child: Icon(
         Icons.arrow_forward_ios_rounded,
-        color: Colors.white,
+        color: Colors.black,
         size: 30,
       ),
     ));
@@ -72,7 +72,7 @@ Widget navContainer({required BuildContext context, required String navText}) =>
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(Icons.arrow_back_ios_new)))
+                icon: const Icon(Icons.arrow_back_ios_new)))
       ],
     );
 
@@ -90,4 +90,38 @@ Widget paymentCards(
         text,
       ),
       onTap: ontap,
+    );
+
+Widget circleviewlist(
+        {required BuildContext context,
+        required String images,
+        required String imageText}) =>
+    Column(
+      children: [
+        Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Stack(
+              alignment: Alignment.center,
+              children: [
+                Icon(Icons.circle, color: Colors.yellow[700], size: 85),
+                const Icon(Icons.circle, color: Colors.white, size: 80),
+                Icon(Icons.circle, color: Colors.yellow[700], size: 76),
+                Positioned(
+                    bottom: 2,
+                    child: Container(
+                      width: 90,
+                      height: 100,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(
+                        images,
+                      ))),
+                    ))
+              ],
+            ),
+          ],
+        ),
+        Text(imageText),
+      ],
     );

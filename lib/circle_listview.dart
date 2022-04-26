@@ -1,5 +1,10 @@
+import 'package:dogsfoodapp/brand_grid_view.dart';
 import 'package:dogsfoodapp/petdetails.dart';
+import 'package:dogsfoodapp/petdetailsGridView.dart';
+import 'package:dogsfoodapp/showGridview.dart';
 import 'package:flutter/material.dart';
+
+import 'widgets/widgets.dart';
 
 class CircleListView extends StatefulWidget {
   const CircleListView({Key? key}) : super(key: key);
@@ -16,67 +21,54 @@ class _CircleListViewState extends State<CircleListView> {
     {"image": "assets/images/beeEater.png", "text": "Birds"},
     {"image": "assets/images/fish.png", "text": "Fish"}
   ];
+
+  int indexnum = 0;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Container(
-            height: 120,
-            child: Center(
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics()),
-                shrinkWrap: true,
-                itemCount: petList.length,
-                itemBuilder: (context, index) => circleviewlist(
-                    images: petList[index]["image"].toString(),
-                    imageText: petList[index]["text"].toString(),
-                    context: context),
+      child: Container(
+        //height: 200,
+        child: Center(
+          child: Column(
+            children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 110,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
+                  shrinkWrap: true,
+                  itemCount: petList.length,
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        indexnum = index;
+                        indexnum == 0
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Petdetails(
+                                          indexOf: index,
+                                        )))
+                            : const SizedBox();
+                      });
+                    },
+                    child: circleviewlist(
+                        images: petList[index]["image"].toString(),
+                        imageText: petList[index]["text"].toString(),
+                        context: context),
+                  ),
+                ),
               ),
-            ),
+              // Padding(
+              //   padding: const EdgeInsets.all(12),
+              //   child: indexnum == 0 ? BrandGridView() : SizedBox(),
+              // ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 }
-
-Widget circleviewlist(
-        {required BuildContext context,
-        required String images,
-        required String imageText}) =>
-    GestureDetector(
-      onTap: () => Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const Petdetails())),
-      child: Column(
-        children: [
-          Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Icon(Icons.circle, color: Colors.yellow[700], size: 85),
-                  const Icon(Icons.circle, color: Colors.white, size: 80),
-                  Icon(Icons.circle, color: Colors.yellow[700], size: 76),
-                  Positioned(
-                      bottom: 2,
-                      child: Container(
-                        width: 90,
-                        height: 100,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage(
-                          images,
-                        ))),
-                      ))
-                ],
-              ),
-            ],
-          ),
-          Text(imageText),
-        ],
-      ),
-    );

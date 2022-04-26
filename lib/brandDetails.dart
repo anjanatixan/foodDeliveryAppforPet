@@ -120,7 +120,10 @@ class _BrandDetailsState extends State<BrandDetails> {
             items: listname.map((valueItem) {
               return DropdownMenuItem(
                 value: valueItem,
-                child: Text(valueItem),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5),
+                  child: Text(valueItem),
+                ),
               );
             }).toList(),
             value: listname[0],
